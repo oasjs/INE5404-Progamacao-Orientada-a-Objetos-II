@@ -1,0 +1,7 @@
+aeiou
+AEIOU
+A
+E
+I
+O
+U
