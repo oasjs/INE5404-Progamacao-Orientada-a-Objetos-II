@@ -2,16 +2,17 @@
 palavra em um texto (arquivo txt) e armazena tal quantidade em um dicionário, onde a
 chave é a vogal considerada.'''
 
-def vowel_frequency(path:str):
+def word_frequency(path:str):
 
-    vowels = ['A','E','I','O','U']
-    counter_dict = {}
-    for vowel in vowels:
-        counter_dict.setdefault(vowel, 0) # setdefault method inserts key with specified value, if the key does not exist.
+    word_counter = {}
 
-    with open(path, 'r') as f:
+    with open(path, 'r', encoding='utf-8') as f:
         f = f.read()
-        f = f.upper()
+        f = f.lower()
+        f = f.split()
+        f.sort()
 
-        for vowel in counter_dict:
-            counter_dict.update({vowel:f.count(vowel)})
+        for word in f:
+            word_counter.update({word: f.count(word)})
+            
+        return word_counter
