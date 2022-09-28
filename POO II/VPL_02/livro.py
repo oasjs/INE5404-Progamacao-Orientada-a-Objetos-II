@@ -82,7 +82,8 @@ class Livro:
             print("Capítulo não existe!")
 
     def findCapituloByTitulo(self, tituloCapitulo: str):
-        if tituloCapitulo in self.__capitulos:
-            return tituloCapitulo
-        else:
-            return None
+        for capitulo in self.__capitulos:
+            if capitulo.titulo == tituloCapitulo:
+                return capitulo
+            else:
+                return None

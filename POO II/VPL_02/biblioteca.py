@@ -12,8 +12,8 @@ class Biblioteca:
                 self.__livros.append(livro)
             else:
                 print("Livro já cadastrado")
-        else:
-            raise TypeError("O objeto não é do tipo Livro")
+        # else:
+        #     raise TypeError("O objeto não é do tipo Livro")
 
     def excluirLivro(self, livro: Livro):
         if isinstance(livro, Livro):
@@ -21,8 +21,8 @@ class Biblioteca:
                 self.__livros.remove(livro)
             else:
                 print("Livro não cadastrado")
-        else:
-            raise TypeError("O objeto não é do tipo Livro")
+        # else:
+        #     raise TypeError("O objeto não é do tipo Livro")
 
     @property
     def livros(self):
