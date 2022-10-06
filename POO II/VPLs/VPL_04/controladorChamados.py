@@ -47,7 +47,3 @@ class ControladorChamados(AbstractControladorChamados):
     @property
     def tipoChamados(self):
         return self.__listaTiposChamados
-
-    @property
-    def chamados(self):
-        return self.__listaChamados
