@@ -3,26 +3,17 @@ from abc import ABC, abstractmethod
 class Animal(ABC):
 	def __init__(self, tamanhoPasso: int):
 		self._tamanhoPasso = tamanhoPasso
-
-
-	"""Insira aqui os outros metodos"""
 	
-	@abstractmethod
-	def produzirSom(self):
-		pass
-
-	@abstractmethod
+	@property
 	def tamanhoPasso(self):
-		pass
+		return self._tamanhoPasso
 
-	@abstractmethod
 	@tamanhoPasso.setter
 	def tamanhoPasso(self, tamanhoPasso: int):
-		pass
+		self._tamanhoPasso = tamanhoPasso
 	
-	@abstractmethod
 	def mover(self):
-		pass
+		return f'ANIMAL: DESLOCOU {self.tamanhoPasso}'
 
 	@abstractmethod
 	def produzirSom(self):
