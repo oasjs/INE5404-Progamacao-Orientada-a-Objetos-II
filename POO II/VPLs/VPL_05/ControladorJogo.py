@@ -4,7 +4,9 @@ import random
 
 class ControladorJogo(AbstractControladorJogo):
     def __init__(self):
-        pass#implementar
+        self.__baralho = []
+        self.__personagens = []
+
 
     '''
     Retorna o baralho
@@ -12,7 +14,7 @@ class ControladorJogo(AbstractControladorJogo):
     '''
     @property
     def baralho(self) -> list:
-        pass#implementar
+        return self.__baralho
 
     '''
     Retorna a lista de personagems
@@ -20,7 +22,7 @@ class ControladorJogo(AbstractControladorJogo):
     '''
     @property
     def personagems(self) -> list:
-        pass#implementar
+        return self.__personagens
 
     '''
     Permite incluir um novo Personagem na lista de personagens do jogo
@@ -38,7 +40,10 @@ class ControladorJogo(AbstractControladorJogo):
                                    velocidade: int,
                                    resistencia: int,
                                    tipo: Tipo) -> Personagem:
-        pass#implementar
+
+        p = Personagem(energia, habilidade, velocidade, resistencia, tipo)
+        self.__personagens.append(p)
+        return p
 
     '''
      Permite incluir uma nova Carta no baralho do jogo
@@ -46,7 +51,9 @@ class ControladorJogo(AbstractControladorJogo):
      @return Retorna a Carta que foi incluida no baralho
      '''
     def inclui_carta_no_baralho(self, personagem: Personagem) -> Carta:
-        pass#implementar
+        c = Carta(personagem)
+        self.__baralho.append(c)
+        return c
 
     '''
     Inicia o jogo, distribuindo aleatoriamente 5 cartas do baralho
@@ -56,7 +63,9 @@ class ControladorJogo(AbstractControladorJogo):
     @param jogador2 Jogador 2
     '''
     def iniciaJogo(self, jogador1: Jogador, jogador2: Jogador):
-        pass#implementar
+        for i in range(5):
+            jogador1.mao.append(self.baralho[random.randint(0, len(self.baralho))])
+            jogador2.mao.append(self.baralho[random.randint(0, len(self.baralho))])
 
     '''
      Realiza uma jogada, ou seja:
@@ -83,4 +92,20 @@ class ControladorJogo(AbstractControladorJogo):
      Caso ocorra empate entre os jogadores, retorna None
      '''
     def jogada(self, mesa: Mesa) -> Jogador:
-        pass#implementar
+        if mesa.jogador1.mao == []: 
+            return mesa.jogador2
+        elif mesa.jogador2.mao == []:
+            return mesa.jogador1
+        else:
+            if mesa.carta_jogador1.valor_total_carta() > mesa.carta_jogador2.valor_total_carta(): 
+                mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador1) 
+                mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador2)
+                return mesa.jogador1
+            elif mesa.carta_jogador2.valor_total_carta() > mesa.carta_jogador1.valor_total_carta():
+                mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador1)
+                mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador2)
+                return mesa.jogador2
+            else:
+                mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador1)
+                mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador2)
+                return None
