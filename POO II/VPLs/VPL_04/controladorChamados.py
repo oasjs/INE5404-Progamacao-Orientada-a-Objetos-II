@@ -21,22 +21,23 @@ class ControladorChamados(AbstractControladorChamados):
         return count
 
     def incluiChamado(self, data: Date, cliente: Cliente, tecnico: Tecnico, titulo: str, descricao: str, prioridade: str, tipo: TipoChamado) -> Chamado:
-        chamado = Chamado(data, cliente, tecnico, titulo, descricao, prioridade, tipo)
-        check = True
-        for c in self.__listaChamados:
-            if c.data == data and c.cliente == cliente and c.tecnico == tecnico and c.tipo == tipo:
-                check = False
-                break
+        if isinstance(data, Date) and isinstance(cliente, Cliente) and isinstance(tecnico, Tecnico) and isinstance(titulo, str) and isinstance(descricao, str) and isinstance(prioridade, int) and isinstance(tipo, TipoChamado):
+            chamado = Chamado(data, cliente, tecnico, titulo, descricao, prioridade, tipo)
+            check = True
+            for c in self.__listaChamados:
+                if c.data == data and c.cliente == cliente and c.tecnico == tecnico and c.tipo == tipo:
+                    check = False
+                    break
 
-        if check:    
-            self.__listaChamados.append(chamado)
-            return chamado
+            if check:    
+                self.__listaChamados.append(chamado)
+                return chamado
 
     def incluiTipoChamado(self, codigo: int, nome: str, descricao: str) -> TipoChamado:
         tipoChamado = TipoChamado(codigo, nome, descricao)
         check = True
         for t in self.__listaTiposChamados:
-            if id(t) == id(tipoChamado):
+            if t.codigo == tipoChamado.codigo:
                 check = False
                 break
 

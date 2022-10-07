@@ -25,12 +25,20 @@ class Chamado(AbstractChamado):
         self.__tipo = tipo
 
     @property
+    def data(self) -> Date:
+        return self.__data
+
+    @property
     def cliente(self) -> Cliente:
         return self.__cliente
 
     @property
-    def data(self) -> Date:
-        return self.__data
+    def tecnico(self) -> Tecnico:
+        return self.__tecnico
+
+    @property
+    def titulo(self) -> str:
+        return self.__titulo
 
     @property
     def descricao(self) -> str:
@@ -41,13 +49,6 @@ class Chamado(AbstractChamado):
         return self.__prioridade
 
     @property
-    def tecnico(self) -> Tecnico:
-        return self.__tecnico
-
-    @property
     def tipo(self) -> TipoChamado:
         return self.__tipo
-
-    @property
-    def titulo(self) -> str:
-        return self.__titulo
+        

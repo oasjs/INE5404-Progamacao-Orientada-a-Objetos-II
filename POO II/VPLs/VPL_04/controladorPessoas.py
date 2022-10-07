@@ -20,7 +20,7 @@ class ControladorPessoas(AbstractControladorPessoas):
         cliente = Cliente(nome, codigo)
         check = True
         for c in self.clientes:
-            if id(c) == id(cliente):
+            if c.codigo == cliente.codigo:
                 check = False
 
         if check:
@@ -31,9 +31,10 @@ class ControladorPessoas(AbstractControladorPessoas):
         tecnico = Tecnico(nome, codigo)
         check = True
         for t in self.tecnicos:
-            if id(t) == id(tecnico):
+            if t.codigo == tecnico.codigo:
                 check = False
 
         if check:
             self.__tecnicos.append(tecnico)
             return tecnico
+            

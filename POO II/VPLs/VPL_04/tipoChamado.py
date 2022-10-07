@@ -18,3 +18,4 @@ class TipoChamado(AbstractTipoChamado):
     @property
     def nome(self) -> str:
         return self.__nome
+        
