@@ -12,7 +12,7 @@ print(cachorro.latir())
 print(cachorro.mover())
 print("")
 
-can = Canarinho(2,2)
+can = Canarinho(2)
 print(can.cantar())
 print(can.mover())
 print("")

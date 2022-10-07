@@ -2,18 +2,19 @@ from abc import ABC, abstractmethod
 
 class Animal(ABC):
 	def __init__(self, tamanhoPasso: int):
-		self._tamanhoPasso = tamanhoPasso
+		self.__tamanhoPasso = tamanhoPasso
 	
 	@property
 	def tamanhoPasso(self):
-		return self._tamanhoPasso
+		return self.__tamanhoPasso
 
 	@tamanhoPasso.setter
 	def tamanhoPasso(self, tamanhoPasso: int):
-		self._tamanhoPasso = tamanhoPasso
-	
+		self.__tamanhoPasso = tamanhoPasso
+
+	@abstractmethod
 	def mover(self):
-		return f'ANIMAL: DESLOCOU {self.tamanhoPasso}'
+		pass
 
 	@abstractmethod
 	def produzirSom(self):
