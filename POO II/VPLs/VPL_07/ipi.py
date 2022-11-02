@@ -19,5 +19,8 @@ class IPI(Imposto):
 
     def calcula_aliquota(self) -> float:
         if self.__aliquota_adicional:
-            self.aliquota = (self.__aliquota_inicial * 1.1) / 100
+           self.__aliquota = (self.__aliquota_inicial * 1.1) / 100
+        else:
+           self.__aliquota = self.__aliquota_inicial / 100
+        return self.__aliquota
             

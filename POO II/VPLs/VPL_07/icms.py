@@ -14,13 +14,8 @@ e a "diferenca_estado" for 2, entao a aliquota calculada sera de 12.0
 class ICMS(Imposto):
     def __init__(self, aliquota:float, incidencia_imposto:IncidenciaImposto, diferenca_estado:float) -> None:
         super().__init__(aliquota, incidencia_imposto)
-        self.__aliquota_inicial = self.aliquota
+        self.__aliquota_inicial = aliquota
         self.__diferenca_estado = diferenca_estado
-
-
-    @property
-    def aliquota(self) -> float:
-        return self.__aliquota
 
     @property
     def diferenca_estado(self) -> float:
@@ -30,6 +25,7 @@ class ICMS(Imposto):
     def diferenca_estado(self, diferenca_estado:float) -> None:
         self.__diferenca_estado = diferenca_estado
 
-    def calcula_aliquota(self):
-        self.aliquota = (self.__aliquota_inicial + self.__diferenca_estado) / 100
+    def calcula_aliquota(self) -> float:
+        self.__aliquota = (self.__aliquota_inicial + self.__diferenca_estado) / 100
+        return self.__aliquota
         

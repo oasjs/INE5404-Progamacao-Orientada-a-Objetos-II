@@ -2,5 +2,8 @@
 
 class EmpresaDuplicadaException(Exception):
     def __init__(self):
-        return "A empresa já existe."
+        pass
+
+    def __str__(self):
+        return f'Empresa já cadastrada'
         

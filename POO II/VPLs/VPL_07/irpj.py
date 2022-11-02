@@ -16,5 +16,6 @@ class IRPJ(Imposto):
         self.__aliquota_inicial = self.aliquota
         self.__desconto = desconto
 
-    def calcula_aliquota(self):
-        self.aliquota = (self.__aliquota_inicial - self.__desconto) / 100
+    def calcula_aliquota(self) -> float:
+        self.__aliquota = (self.__aliquota_inicial - self.__desconto) / 100
+        return self.__aliquota 

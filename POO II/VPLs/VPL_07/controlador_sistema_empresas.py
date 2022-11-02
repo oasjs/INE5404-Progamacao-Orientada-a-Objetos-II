@@ -6,7 +6,7 @@ from empresa import Empresa
 class ControladorSistemaEmpresas():
     
     def __init__(self):
-        self.__dao = EmpresaDAO()
+        self.__empresa_dao = EmpresaDAO()
 
     '''
     Permite incluir uma empresa utilizando a EmpresaDAO. 
@@ -16,20 +16,21 @@ class ControladorSistemaEmpresas():
     @throws EmpresaDuplicadaException Excecao gerada quando se
     tenta incluir uma empresa com CNPJ ja cadastrado
     '''
-    def inclui_empresa(self, empresa: Empresa):
-        if self.busca_empresa_pelo_cnpj(empresa.cnpj) is not None:
-            raise EmpresaDuplicadaException
-        else:
-            self.__dao.add(empresa)
-
+    def inclui_empresa(self, empresa: Empresa) -> None:
+        if isinstance(empresa, Empresa):
+            if self.busca_empresa_pelo_cnpj(empresa.cnpj) is not None:
+                raise EmpresaDuplicadaException
+            else:
+                self.__empresa_dao.add(empresa)
+    
     '''
     Permite excluir uma empresa cadastrada na EmpresaDAO
     @param empresa empresa que sera excluida
     '''
-    def exclui_empresa(self, empresa: Empresa):
-        if self.busca_empresa_pelo_cnpj(empresa.cnpj) is not None:
-            self.__dao.remove(empresa)
-
+    def exclui_empresa(self, empresa: Empresa) -> None:
+        if isinstance(empresa, Empresa):
+            if self.busca_empresa_pelo_cnpj(empresa.cnpj) is not None:
+                self.__empresa_dao.remove(empresa)
 
     '''
     Permite buscar uma empresa na lista de empresas pelo CNPJ
@@ -38,7 +39,7 @@ class ControladorSistemaEmpresas():
     @return retorna None se a empresa nao for encontrada
     '''
     def busca_empresa_pelo_cnpj(self, cnpj: int) -> Empresa:
-        return self.__dao.get(cnpj)
+        return self.__empresa_dao.get(cnpj)
 
     '''
     Retorna a lista de empresas cadastradas
@@ -47,7 +48,7 @@ class ControladorSistemaEmpresas():
     '''
     @property
     def empresas(self) -> list:
-        return self.__dao.get_all()
+        return self.__empresa_dao.get_all()
 
     '''
     Calcula o total de impostos de todas as empresas.

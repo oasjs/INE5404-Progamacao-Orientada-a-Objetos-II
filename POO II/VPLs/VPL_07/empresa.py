@@ -1,5 +1,4 @@
 from imposto import Imposto
-from empresa_duplicada_exception import EmpresaDuplicadaException
 from incidencia_imposto import IncidenciaImposto
 
 class Empresa():
@@ -9,9 +8,9 @@ class Empresa():
         self.__impostos = []
 
         # Faturamentos
-        self.__faturamento_servicos
-        self.__faturamento_producao
-        self.__faturamento.vendas
+        self.__faturamento_servicos = 0.0
+        self.__faturamento_producao = 0.0
+        self.__faturamento_vendas = 0.0
 
     '''
     Retorna a lista de impostos da empresa
@@ -27,12 +26,10 @@ class Empresa():
     @param imposto imposto a ser incluido
     '''
     def inclui_imposto(self, imposto: Imposto):
-        for item in self.impostos:
-            if id(item) == id(imposto):
-                raise EmpresaDuplicadaException
-            else:
-                self.impostos.append(imposto)
-                break
+        if imposto in self.impostos:
+            return 'Imposto já cadastrado'
+        else:
+            self.impostos.append(imposto)
 
     '''
     Exclui um imposto cadastrado
@@ -75,13 +72,13 @@ class Empresa():
         total = 0.0
         for imposto in self.impostos:
             if imposto.incidencia_imposto == IncidenciaImposto.PRODUCAO:
-                total += imposto.aliquota * self.faturamento_producao
+                total += (imposto.calcula_aliquota()) * self.faturamento_producao
             elif imposto.incidencia_imposto == IncidenciaImposto.VENDAS:
-                total += imposto.aliquota * self.faturamento_vendas
+                total += (imposto.calcula_aliquota()) * self.faturamento_vendas
             elif imposto.incidencia_imposto == IncidenciaImposto.SERVICOS:
-                total += imposto.aliquota * self.faturamento_servicos
-            elif imposto.incidencia_imposto == IncidenciaImposto.TOTAL:
-                total += imposto.aliquota * self.faturamento_total()
+                total += (imposto.calcula_aliquota()) * self.faturamento_servicos
+            elif imposto.incidencia_imposto == IncidenciaImposto.TODOS:
+                total += (imposto.calcula_aliquota()) * self.faturamento_total()
         return total
         
     @property

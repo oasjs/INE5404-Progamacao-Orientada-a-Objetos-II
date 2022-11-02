@@ -27,5 +27,6 @@ class ISS(Imposto):
         if nome in self.__servicos:
             self.__servicos.remove(nome)
 
-    def calcula_aliquota(self):
-        self.aliquota = (self.__aliquota_inicial - len(self.__servicos) / 10) / 100
+    def calcula_aliquota(self) -> float:
+       self.__aliquota = (self.__aliquota_inicial - len(self.__servicos) / 10) / 100
+       return self.__aliquota
